@@ -1,23 +1,23 @@
+import { AllShopsQueryDocument } from "@/gql/graphql"
+import { getDatoRequestClient } from "@/lib/datocms"
 import Image from "next/image"
 import { Inter } from "@next/font/google"
 import styles from "./page.module.css"
+import { graphql } from "@/gql"
 
 const inter = Inter({ subsets: ["latin"] })
 
-async function getApexPlayerData(playerName = "scarlettdaylight", platform = "PS4") {
-  const res = await fetch(
-    `https://api.mozambiquehe.re/bridge?auth=${process.env.APEX_STATUS_API_KEY}&player=${playerName}&platform=${platform}`,
-  )
+async function getCoffeeList() {
+  const client = getDatoRequestClient()
+  const result = await client.request(AllShopsQueryDocument)
 
-  if (!res.ok) {
-    throw Error("Failed to fetch apex data")
-  }
-
-  return res.json()
+  return result.allShops
 }
 
 export default async function Home() {
-  const data = await getApexPlayerData()
+  const data = await getCoffeeList()
+
+  console.log(data)
 
   return (
     <main className={styles.main}>
