@@ -22,7 +22,7 @@ export default async function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.description}>
-        <p>
+        <p className="text-3xl">
           Get started by editing&nbsp;
           <code className={styles.code}>app/page.tsx</code>
         </p>
